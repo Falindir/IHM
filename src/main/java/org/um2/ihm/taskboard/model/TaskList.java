@@ -1,4 +1,5 @@
-package org.springframework.samples.petclinic.model;
+package org.um2.ihm
+        .taskboard.model;
 
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class TaskList extends BaseEntity{
         
     @ManyToOne
     @JoinColumn(name = "board_id")
+    @NotEmpty
     private Board board;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tasklist")
@@ -41,14 +43,6 @@ public class TaskList extends BaseEntity{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<Group> getGroups() {
-		return groups;
-	}
-
-	public void setGroups(Set<Group> groups) {
-		this.groups = groups;
 	}
 
 	public Board getBoard() {

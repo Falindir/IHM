@@ -1,4 +1,5 @@
-package org.springframework.samples.petclinic.model;
+package org.um2.ihm
+        .taskboard.model;
 
 import java.util.Set;
 

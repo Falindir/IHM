@@ -15,6 +15,7 @@
     <!-- import the dataSource definition -->
     <import resource="datasource-config.xml"/>
 
+    <!-- TODO OU SCANNER LES SERVICES -->
     <context:component-scan
             base-package="org.springframework.samples.petclinic.service"/>
 
@@ -31,7 +32,7 @@
 									- jpa
 									- spring-data-jpa	
 		  =============================================================================-->
-	
+	<!-- A MODIFIER TODO JPA MANAGER FACTORY (pour SpringDataJPA et JPA) -->
     <beans profile="jpa,spring-data-jpa">
         <!-- JPA EntityManagerFactory -->
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -91,6 +92,7 @@
     </beans>
 
     <beans profile="spring-data-jpa">
+        <!-- list des repositories pour dataSpring JPA -->
         <jpa:repositories base-package="org.springframework.samples.petclinic.repository.springdatajpa"/>
     </beans>
 </beans>
