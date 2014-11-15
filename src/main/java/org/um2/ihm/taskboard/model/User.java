@@ -6,19 +6,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -28,12 +19,13 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 
 @Entity
-@Table(name = "User")
+@Table(name = "User",uniqueConstraints={@UniqueConstraint(columnNames="mail_user"),
+        @UniqueConstraint(columnNames="mail_user")})
 public class User extends BaseEntity implements UserDetails {
 
-    @Column(name = "pseudo_user")
+    @Column(name = "name_user")
     @NotEmpty
-	private String pseudo;
+	private String name;
     
     @Column(name = "mail_user")
     @NotEmpty
@@ -54,14 +46,6 @@ public class User extends BaseEntity implements UserDetails {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tempTravel")
     private Set<WorkUser> works;
-
-	public String getPseudo() {
-		return pseudo;
-	}
-
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
-	}
 
 	public String getMail() {
 		return mail;
@@ -85,7 +69,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getPseudo();
+        return this.name;
     }
 
     @Override
