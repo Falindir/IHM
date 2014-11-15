@@ -4,13 +4,7 @@ package org.um2.ihm
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -41,33 +35,26 @@ public class Task extends BaseEntity{
     private String etat;
     
     private Group group;
-    
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User creator;
-     
-    private Set<History> history;
-    
-    private Set<History> worker;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.task", cascade=CascadeType.ALL)
+    private Set<WorkUser> works;
     
     @ManyToOne
     @JoinColumn(name = "tasklist_id")
     private TaskList tasklist;
         
     @Column(name = "creation_task")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private DateTime dreationDate;
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
     
     @Column(name = "task_dueDate")
     @NotEmpty
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private DateTime dueDate;
-    
-    @Column(name = "task_dueDate")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private DateTime endDate;
-
-    
-    
+    @Temporal(TemporalType.DATE)
+    private Date dueDate;
     
     
 }

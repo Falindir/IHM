@@ -11,11 +11,8 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "History")
-public class History extends BaseEntity{
-	
-    @Column(name = "description_task")
+public class History{
+
     //@NotEmpty TODO à verif si peut être empty
 	private String description;
 

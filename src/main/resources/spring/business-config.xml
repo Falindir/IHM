@@ -17,22 +17,22 @@
 
     <!-- TODO OU SCANNER LES SERVICES -->
     <context:component-scan
-            base-package="org.springframework.samples.petclinic.service"/>
+            base-package="org.um2.ihm.taskboard.service"/>
 
     <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
     <!-- (in this case, JDBC-related settings for the JPA EntityManager definition below) -->
     <context:property-placeholder location="classpath:spring/data-access.properties" system-properties-mode="OVERRIDE"/>
 
-     <!-- enables scanning for @Transactional annotations -->
+    <!-- enables scanning for @Transactional annotations -->
     <tx:annotation-driven />
- 
-	
-	<!-- ==================		 3 Profiles to choose from 			=================== 
-									- jdbc (uses Spring" JdbcTemplate)
-									- jpa
-									- spring-data-jpa	
-		  =============================================================================-->
-	<!-- A MODIFIER TODO JPA MANAGER FACTORY (pour SpringDataJPA et JPA) -->
+
+
+    <!-- ==================		 3 Profiles to choose from 			===================
+                                    - jdbc (uses Spring" JdbcTemplate)
+                                    - jpa
+                                    - spring-data-jpa
+          =============================================================================-->
+    <!-- A MODIFIER TODO JPA MANAGER FACTORY (pour SpringDataJPA et JPA) -->
     <beans profile="jpa,spring-data-jpa">
         <!-- JPA EntityManagerFactory -->
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -43,12 +43,12 @@
                 <!-- the 'database' parameter refers to the database dialect being used.
                 	By default, Hibernate will use a 'HSQL' dialect because 'jpa.database' has been set to 'HSQL'
                 	inside file spring/data-access.properties
-                
                  -->
             </property>
+
             <!-- gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win -->
-            <property name="persistenceUnitName" value="petclinic"/>
-            <property name="packagesToScan" value="org.springframework.samples.petclinic"/>
+            <property name="PersistenceUnitName" value="taskboard"/>
+            <property name="packagesToScan" value="org.um2.ihm.taskboard.model"/>
         </bean>
 
         <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
@@ -63,24 +63,6 @@
         <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
     </beans>
-
-    <beans profile="jdbc">
-        <!-- Transaction manager for a single JDBC DataSource (alternative to JTA) -->
-        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-              p:dataSource-ref="dataSource"/>
-
-        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-            <constructor-arg ref="dataSource"/>
-        </bean>
-
-        <bean id="namedParameterJdbcTemplate"
-              class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-            <constructor-arg ref="dataSource"/>
-        </bean>
-
-        <context:component-scan base-package="org.springframework.samples.petclinic.repository.jdbc"/>
-    </beans>
-
     <beans profile="jpa">
         <!--
             Loads JPA beans
@@ -88,11 +70,11 @@
             EntityManager will be auto-injected due to @PersistenceContext.
             PersistenceExceptions will be auto-translated due to @Repository.
         -->
-        <context:component-scan base-package="org.springframework.samples.petclinic.repository.jpa"/>
+        <context:component-scan base-package="org.um2.ihm.taskboard.repository.jpa"/>
     </beans>
 
     <beans profile="spring-data-jpa">
         <!-- list des repositories pour dataSpring JPA -->
-        <jpa:repositories base-package="org.springframework.samples.petclinic.repository.springdatajpa"/>
+        <jpa:repositories base-package="org.um2.ihm.taskboard.repository.springdatajpa"/>
     </beans>
 </beans>

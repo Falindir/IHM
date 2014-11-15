@@ -9,63 +9,61 @@
 	<packaging>war</packaging>
 
 	<properties>
+        <!-- Generic properties -->
+        <java.version>1.6</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- Generic properties -->
-		<java.version>1.6</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<!-- Spring -->
-		<spring-framework.version>RELEASE</spring-framework.version>
-		<spring-data-jpa.version>RELEASE</spring-data-jpa.version>
-
-
-		<!-- Java EE / Java SE dependencies -->
-		<jsp.version>RELEASE</jsp.version>
-		<jstl.version>RELEASE</jstl.version>
-		<tomcat.servlet.version>RELEASE</tomcat.servlet.version>
-		<jaxb-impl.version>RELEASE</jaxb-impl.version>
-
-		<!-- Hibernate / JPA -->
-		<hibernate.version>RELEASE</hibernate.version>
-
-		<!-- Bean validation -->
-		<hibernate-validator.version>RELEASE</hibernate-validator.version>
-
-		<!-- Database access -->
-		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
-		<ehcache.version>RELEASE</ehcache.version>
-		<hsqldb.version>RELEASE</hsqldb.version>
-
-		<!-- AOP -->
-		<aspectj.version>1.8.2</aspectj.version>
-
-		<!-- Logging -->
-		<logback.version>RELEASE</logback.version>
-		<slf4j.version>1.7.7</slf4j.version>
-
-		<!-- RSS -->
-		<rome.version>1.5.0</rome.version>
-
-		<!-- Test -->
-		<junit.version>4.11</junit.version>
-		<hamcrest.version>1.3</hamcrest.version>
-
-		<!-- Dates -->
-		<jodatime-hibernate.version>1.3</jodatime-hibernate.version>
-		<jodatime-jsptags.version>1.1.1</jodatime-jsptags.version>
-		<jodatime.version>2.5</jodatime.version>
-		<jadira-usertype-core.version>3.2.0.GA</jadira-usertype-core.version>
+        <!-- Spring -->
+        <spring-framework.version>RELEASE</spring-framework.version>
+        <spring-data-jpa.version>1.7.0.RELEASE</spring-data-jpa.version>
 
 
-		<!-- Web dependencies -->
-		<webjars-bootstrap.version>RELEASE</webjars-bootstrap.version>
-		<webjars-jquery-ui.version>RELEASE</webjars-jquery-ui.version>
-		<webjars-jquery.version>RELEASE</webjars-jquery.version>
-		<dandelion.version>RELEASE</dandelion.version>
+        <!-- Java EE / Java SE dependencies -->
+        <jsp.version>2.2</jsp.version>
+        <jstl.version>1.2</jstl.version>
+        <tomcat.servlet.version>7.0.30</tomcat.servlet.version>
+        <jaxb-impl.version>2.2.7</jaxb-impl.version>
 
-		<mysql.version>RELEASE</mysql.version>
+        <!-- Hibernate / JPA -->
+        <hibernate.version>4.3.6.Final</hibernate.version>
 
+        <!-- Bean validation -->
+        <hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
+
+        <!-- Database access -->
+        <tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
+        <ehcache.version>2.6.9</ehcache.version>
+        <hsqldb.version>2.3.2</hsqldb.version>
+
+        <!-- AOP -->
+        <aspectj.version>1.8.2</aspectj.version>
+
+        <!-- Logging -->
+        <logback.version>1.1.2</logback.version>
+        <slf4j.version>1.7.7</slf4j.version>
+
+        <!-- RSS -->
+        <rome.version>1.5.0</rome.version>
+
+        <!-- Test -->
+        <junit.version>4.11</junit.version>
+        <hamcrest.version>1.3</hamcrest.version>
+
+        <!-- Dates -->
+        <jodatime-hibernate.version>1.3</jodatime-hibernate.version>
+        <jodatime-jsptags.version>1.1.1</jodatime-jsptags.version>
+        <jodatime.version>2.5</jodatime.version>
+        <jadira-usertype-core.version>3.2.0.GA</jadira-usertype-core.version>
+
+
+        <!-- Web dependencies -->
+        <webjars-bootstrap.version>2.3.0</webjars-bootstrap.version>
+        <webjars-jquery-ui.version>1.10.3</webjars-jquery-ui.version>
+        <webjars-jquery.version>2.0.3-1</webjars-jquery.version>
+        <dandelion.version>0.10.1</dandelion.version>
+
+        <mysql.version>5.1.22</mysql.version>
 	</properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -73,13 +71,13 @@
         <version>1.1.9.RELEASE</version>
     </parent>
 	<dependencies>
-        <!--
+
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.core</artifactId>
 			<version>${jadira-usertype-core.version}</version>
 		</dependency>
-		-->
+
 		<dependency>
         	<groupId>org.apache.tomcat</groupId>
         	<artifactId>tomcat-servlet-api</artifactId>
@@ -156,6 +154,16 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
 
 		<!-- Database connection pool 
 		See here for more details on commons-dbcp versus tomcat-jdbc: 
@@ -184,13 +192,13 @@
 		</dependency>
 
 		<!-- used for Atom -->
-        <!--
+
 		<dependency>
 			<groupId>com.rometools</groupId>
 			<artifactId>rome</artifactId>
 			<version>${rome.version}</version>
 		</dependency>
-		-->
+
 		<!-- Date and Time -->
 
 		<dependency>
@@ -211,11 +219,13 @@
 
 		<!-- Databases - Uses HSQL by default -->
 		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> <version>${mysql.version}</version> </dependency> -->
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -223,8 +233,15 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
 		<!-- For MySql only -->
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> <version>${mysql.version}</version> </dependency> -->
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.34</version>
+        </dependency>
+
+
 		<!-- HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -236,7 +253,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
         </dependency>
-        <!--
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -259,7 +276,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		-->
+
 		<!-- Webjars (static dependencies distributed as JAR files) -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -293,7 +310,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- used by Spring MVC Test framework -->
-        <!--
+
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-library</artifactId>
@@ -312,10 +329,10 @@
 			<version>${aspectj.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-        -->
+
 
 		<!-- Dandelion -->
-        <!--
+
 		<dependency>
 			<groupId>com.github.dandelion</groupId>
 			<artifactId>datatables-jsp</artifactId>
@@ -326,7 +343,6 @@
 			<artifactId>datatables-export-itext</artifactId>
 			<version>${dandelion.version}</version>
 		</dependency>
-		-->
 	</dependencies>
     <!--
 	<dependencyManagement>
@@ -369,6 +385,61 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>-->
-
-
+    <build>
+        <plugins>
+            <!-- other plugins ... -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <compilerArguments>
+                        <Xlint />
+                    </compilerArguments>
+                    <verbose>true</verbose>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warName>ihm</warName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <server>tomcat-development-server</server>
+                    <port>9966</port>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

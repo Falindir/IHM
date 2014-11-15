@@ -40,11 +40,4 @@ public interface UserRepository extends BaseEntityRepository<User>
     @Override
     void deleteAll();
 
-    <S extends User> S findByName(String username);
-
-    <S extends User> S findByMail(String mail);
-
-    <S extends User> S findByNameAndPassword(String username, String password);
-
-    <S extends User> S findByMailAndPassword(String mail, String password);
 }

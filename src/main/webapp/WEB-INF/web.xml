@@ -44,7 +44,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 - Servlet that dispatches request to registered handlers (Controller implementations).
 -->
     <servlet>
-        <servlet-name>petclinic</servlet-name>
+        <servlet-name>taskboard</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -53,10 +53,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+
     <servlet-mapping>
-        <servlet-name>petclinic</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>taskboard</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
 
     <!-- Dandelion servlet definition and mapping
     <servlet>
@@ -91,7 +93,7 @@ see here: http://static.springsource.org/spring/docs/current/spring-framework-re
 
     <filter-mapping>
         <filter-name>httpMethodFilter</filter-name>
-        <servlet-name>petclinic</servlet-name>
+        <servlet-name>ihm</servlet-name>
     </filter-mapping>
     
     <!-- used to provide the ability to enter Chinese characters inside the Owner Form -->    
@@ -106,6 +108,7 @@ see here: http://static.springsource.org/spring/docs/current/spring-framework-re
 	        <param-name>forceEncoding</param-name>
 	        <param-value>true</param-value>
 	    </init-param>
+
 	 </filter>
 	
 	 <filter-mapping>

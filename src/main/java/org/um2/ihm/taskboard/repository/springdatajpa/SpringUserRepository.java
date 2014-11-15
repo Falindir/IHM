@@ -11,22 +11,22 @@ import org.um2.ihm.taskboard.repository.UserRepository;
 public interface SpringUserRepository extends UserRepository
 {
     @Override
-    <S extends User> S save(S entity);
+    <S extends User> S save(S user);
 
     @Override
-    <S extends User> Iterable<S> save(Iterable<S> entities);
+    <S extends User> Iterable<S> save(Iterable<S> users);
 
     @Override
-    User findOne(Long aLong);
+    User findOne(Long id);
 
     @Override
-    boolean exists(Long aLong);
+    boolean exists(Long id);
 
     @Override
     Iterable<User> findAll();
 
     @Override
-    Iterable<User> findAll(Iterable<Long> longs);
+    Iterable<User> findAll(Iterable<Long> ids);
 
     @Override
     long count();
@@ -43,19 +43,5 @@ public interface SpringUserRepository extends UserRepository
     @Override
     void deleteAll();
 
-    @Override
-    @Query("SELECT user FROM User user WHERE user.name LIKE :username")
-    <S extends User> S findByName(@Param("username")String username);
 
-    @Override
-    @Query("SELECT user FROM User user WHERE user.mail LIKE :mail")
-    <S extends User> S findByMail(@Param("mail")String mail);
-
-    @Override
-    @Query("SELECT user FROM User user WHERE user.name LIKE :username% AND user.password LIKE :password")
-    <S extends User> S findByNameAndPassword(@Param("username")String username, @Param("password") String password);
-
-    @Override
-    @Query("SELECT user FROM User user WHERE user.name LIKE :mail% AND user.password LIKE :password")
-    <S extends User> S findByMailAndPassword(@Param("mail")String mail,@Param("password") String password);
 }

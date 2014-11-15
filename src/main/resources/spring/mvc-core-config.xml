@@ -20,10 +20,10 @@
         - POJOs labeled with the @Controller and @Service annotations are auto-detected.
     -->
     <context:component-scan
-            base-package="org.springframework.samples.petclinic.web"/>
+            base-package="org.um2.ihm.taskboard.web.controllers"/>
 
     <mvc:annotation-driven conversion-service="conversionService"/>
-
+    <mvc:annotation-driven/>
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be refered to inside JSP files
         (see header.jsp for more details) -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
@@ -39,7 +39,7 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
             <set>
-                <bean class="org.springframework.samples.petclinic.web.PetTypeFormatter"/>
+                <!--<bean class="org.springframework.samples.petclinic.web.PetTypeFormatter"/>-->
             </set>
         </property>
     </bean>

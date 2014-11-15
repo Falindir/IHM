@@ -40,11 +40,8 @@ public class User extends BaseEntity implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participants")
     private Set<Board> boards;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "actionUser")
-    private Set<History> historys;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tempTravel")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
     private Set<WorkUser> works;
 
 	public String getMail() {
@@ -110,14 +107,6 @@ public class User extends BaseEntity implements UserDetails {
 
 	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
-	}
-
-	public Set<History> getHistorys() {
-		return historys;
-	}
-
-	public void setHistorys(Set<History> historys) {
-		this.historys = historys;
 	}
 
 	public Set<WorkUser> getWorks() {
