@@ -1,6 +1,9 @@
 package org.um2.ihm
         .taskboard.model;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 
@@ -23,7 +29,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "User")
-public class User extends BaseEntity{
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "pseudo_user")
     @NotEmpty
@@ -65,11 +71,44 @@ public class User extends BaseEntity{
 		this.mail = mail;
 	}
 
-	public String getPassword() {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<Role> g=new ArrayList<Role>();
+        Role gt = new Role();
+        g.add(gt);
+        return g;
+    }
+
+    public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+    @Override
+    public String getUsername() {
+        return getPseudo();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setPassword(String password) {
 		this.password = password;
 	}
 

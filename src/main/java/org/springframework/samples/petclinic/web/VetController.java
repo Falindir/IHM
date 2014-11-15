@@ -32,10 +32,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VetController {
 
+    @Autowired
     private final ClinicService clinicService;
 
-
-    @Autowired
     public VetController(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
