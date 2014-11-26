@@ -1,6 +1,6 @@
-package org.um2.ihm.taskboard.repository;
+package org.um2.taskboard.repository;
 
-import org.um2.ihm.taskboard.model.Group;
+import org.um2.taskboard.model.Group;
 
 /**
  * Created by BEUGNON on 15/11/2014.

@@ -1,9 +1,8 @@
-package org.um2.ihm.taskboard.repository;
+package org.um2.taskboard.repository;
 
 import org.springframework.data.repository.CrudRepository;
-
-import org.um2.ihm.taskboard.model.BaseEntity;
-import org.um2.ihm.taskboard.model.User;
+import org.um2.taskboard.model.BaseEntity;
+import org.um2.taskboard.model.User;
 /**
  * Created by BEUGNON on 15/11/2014.
  */

@@ -1,11 +1,11 @@
-package org.um2.ihm.taskboard.service;
+package org.um2.taskboard.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.um2.ihm.taskboard.model.User;
-import org.um2.ihm.taskboard.repository.UserRepository;
+import org.um2.taskboard.model.User;
+import org.um2.taskboard.repository.UserRepository;
 
 /**
  * Created by BEUGNON on 15/11/2014.

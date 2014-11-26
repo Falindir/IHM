@@ -1,7 +1,7 @@
-package org.um2.ihm.taskboard.repository.springdatajpa;
+package org.um2.taskboard.repository.springdatajpa;
 
-import org.um2.ihm.taskboard.model.Group;
-import org.um2.ihm.taskboard.repository.GroupRepository;
+import org.um2.taskboard.model.Group;
+import org.um2.taskboard.repository.GroupRepository;
 
 /**
  * Created by BEUGNON on 15/11/2014.

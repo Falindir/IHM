@@ -1,8 +1,8 @@
-package org.um2.ihm.taskboard.service;
+package org.um2.taskboard.service;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.um2.ihm.taskboard.model.User;
+import org.um2.taskboard.model.User;
 
 /**
  * Created by BEUGNON on 15/11/2014.

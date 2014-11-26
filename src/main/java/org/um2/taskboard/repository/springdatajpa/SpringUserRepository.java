@@ -1,9 +1,9 @@
-package org.um2.ihm.taskboard.repository.springdatajpa;
+package org.um2.taskboard.repository.springdatajpa;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.um2.ihm.taskboard.model.User;
-import org.um2.ihm.taskboard.repository.UserRepository;
+import org.um2.taskboard.model.User;
+import org.um2.taskboard.repository.UserRepository;
 
 /**
  * Created by BEUGNON on 15/11/2014.

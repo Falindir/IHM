@@ -1,9 +1,9 @@
-package org.um2.ihm.taskboard.repository;
+package org.um2.taskboard.repository;
 
 /**
  * Created by BEUGNON on 15/11/2014.
  */
-import org.um2.ihm.taskboard.model.User;
+import org.um2.taskboard.model.User;
 
 public interface UserRepository extends BaseEntityRepository<User>
 {
