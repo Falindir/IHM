@@ -1,4 +1,4 @@
-package org.um2.ihm.taskboard.web.controllers;
+package org.um2.taskboard.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController
 {
     @RequestMapping(name="home", value="/", method= RequestMethod.GET)
-    public String index() {
+    public ModelAndView index() {
         ModelAndView mav = new ModelAndView("welcome");
 
-        return "welcome";
+        return mav;
     }
 
     @RequestMapping(name="home", value="/welcome")
-    public String welcome() {
+    public ModelAndView welcome() {
         ModelAndView mav = new ModelAndView("welcome");
-        return "welcome";
+        return mav;
     }
 
 }

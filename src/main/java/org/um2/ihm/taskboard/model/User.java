@@ -1,5 +1,4 @@
-package org.um2.ihm
-        .taskboard.model;
+package org.um2.taskboard.model;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,26 +18,31 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 
 @Entity
-@Table(name = "User",uniqueConstraints={@UniqueConstraint(columnNames="mail_user"),
-        @UniqueConstraint(columnNames="mail_user")})
+@Table(name = "Users",uniqueConstraints={@UniqueConstraint(columnNames="mail"),
+        @UniqueConstraint(columnNames="name")})
 public class User extends BaseEntity implements UserDetails {
 
-    @Column(name = "name_user")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "name")
     @NotEmpty
 	private String name;
     
-    @Column(name = "mail_user")
+    @Column(name = "mail")
     @NotEmpty
 	private String mail;
     
-    @Column(name = "password_user")
+    @Column(name = "password")
     @NotEmpty
 	private String password;
     
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
     private Set<Group> groups;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participants")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private Set<Board> boards;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
@@ -52,7 +56,7 @@ public class User extends BaseEntity implements UserDetails {
 		this.mail = mail;
 	}
 
-    @Override
+   
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<Role> g=new ArrayList<Role>();
         Role gt = new Role();
@@ -60,31 +64,32 @@ public class User extends BaseEntity implements UserDetails {
         return g;
     }
 
+    
     public String getPassword() {
 		return password;
 	}
 
-    @Override
+
     public String getUsername() {
         return this.name;
     }
 
-    @Override
+    
     public boolean isAccountNonExpired() {
         return false;
     }
 
-    @Override
+    
     public boolean isAccountNonLocked() {
         return false;
     }
 
-    @Override
+    
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
+    
     public boolean isEnabled() {
         return true;
     }

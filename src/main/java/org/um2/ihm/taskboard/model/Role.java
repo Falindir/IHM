@@ -1,4 +1,4 @@
-package org.um2.ihm.taskboard.model;
+package org.um2.taskboard.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -8,7 +8,12 @@ import org.springframework.security.core.GrantedAuthority;
 public class Role implements GrantedAuthority {
 
 
-    public String getAuthority()
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public String getAuthority()
     {
         return "ROLE_USER";
     }

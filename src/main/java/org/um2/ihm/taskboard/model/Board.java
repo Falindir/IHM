@@ -1,5 +1,4 @@
-package org.um2.ihm
-        .taskboard.model;
+package org.um2.taskboard.model;
 
 import java.util.Set;
 
@@ -21,20 +20,24 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name = "Board")
+@Table(name = "Boards")
 public class Board extends BaseEntity {
 	
-    @Column(name = "name_board")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "name")
     @NotEmpty
 	private String name;
     
-    //TODO passer en enum et valeur par default public
-    @Column(name = "access_board")
+    @Column(name = "access")
     @NotEmpty
     private String access;
     
-    @Column(name = "description_board")
-    //@NotEmpty TODO à verif si peut être empty
+    @Column(name = "description")
+    //@NotEmpty
 	private String description;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
@@ -74,8 +77,16 @@ public class Board extends BaseEntity {
 		return taskLists;
 	}
 
-	public void setTaskLists(Set<TaskList> taskLists) {
-		this.taskLists = taskLists;
+	public void addTasklist(TaskList ts)
+	{
+		if( !this.getTaskLists().contains(ts) )
+			this.getTaskLists().add(ts);
+	}
+	
+	public void removeTasklist(TaskList ts)
+	{
+		if( this.getTaskLists().contains(ts) )
+			this.getTaskLists().remove(ts);
 	}
 
 	public Set<User> getParticipants() {

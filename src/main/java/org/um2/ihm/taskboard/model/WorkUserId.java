@@ -1,22 +1,34 @@
-package org.um2.ihm.taskboard.model;
+package org.um2.taskboard.model;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 /**
  * Created by BEUGNON on 15/11/2014.
+ * @author beugnon
  */
 @Embeddable
 public class WorkUserId implements java.io.Serializable {
 
 
-    @ManyToOne
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne
     private User user;
     @ManyToOne
     private Task task;
 
 
-    public User getUser() {
+    public WorkUserId(Task task2, User worker)
+	{
+		setTask(task2);
+		setUser(worker);
+	}
+
+	public User getUser() {
         return user;
     }
 

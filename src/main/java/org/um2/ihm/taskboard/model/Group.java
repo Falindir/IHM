@@ -1,5 +1,4 @@
-package org.um2.ihm
-        .taskboard.model;
+package org.um2.taskboard.model;
 
 import java.util.Set;
 
@@ -9,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,86 +19,90 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name = "Group")
-public class Group extends BaseEntity{
+@Table(name = "Groups")
+public class Group extends BaseEntity
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-    @Column(name = "name_group")
-    @NotEmpty
+	@Column(name = "name")
+	@NotEmpty
 	private String name;
-    
-    @Column(name = "description_group")
+	
+	@Column(name = "description")
 	private String description;
-   
-	@Column(name = "admin_group")
-    @NotEmpty
+	
+	@Column(name = "admin")
+	@NotEmpty
 	private User admin;
-    
-    //TODO passer en enum et valeur par default public
-    @Column(name = "access_group")
-    //@Enumerated(EnumACCESS.STRING)
-    private String access;
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "group_users", joinColumns = @JoinColumn(name = "group_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> members;
-    
-    
- 
-	public String getName() {
+	
+	@Column(name = "access")
+	@NotEmpty
+	private String access;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "group_users", 
+	joinColumns = @JoinColumn(name = "group_id"), 
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> members;
+	
+	public String getName()
+	{
 		return name;
 	}
-
-	public void setName(String name) {
+	
+	public void setName(String name)
+	{
 		this.name = name;
 	}
-
-	public String getDescription() {
+	
+	public String getDescription()
+	{
 		return description;
 	}
-
-	public void setDescription(String description) {
+	
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
-
-	public User getAdmin() {
+	
+	public User getAdmin()
+	{
 		return admin;
 	}
-
-	public void setAdmin(User admin) {
+	
+	public void setAdmin(User admin)
+	{
 		this.admin = admin;
 	}
 	
-	public Set<User> getMembers() {
+	public Set<User> getMembers()
+	{
 		return members;
 	}
-
-	public User getMember() {
-		//TODO 
-		return null;
+	
+	public void addMember(User u)
+	{
+		if (!this.getMembers().contains(u))
+			this.getMembers().add(u);
 	}
 	
-	public void addMember(User u) {
-		//TODO
+	public void deleteMember(User u)
+	{
+		if (this.getMembers().contains(u))
+			this.getMembers().remove(u);
 	}
 	
-	public void deleteMember(User U) {
-		//TODO
-	}
-	/*
-	public void setMembers(Collection<User> members) {
-		this.members = members;
-	}
-	*/
-	
-    public String getAccess() {
+	public String getAccess()
+	{
 		return access;
 	}
-
-	public void setAccess(String access) {
+	
+	public void setAccess(String access)
+	{
 		this.access = access;
 	}
 	
-
-    
 }

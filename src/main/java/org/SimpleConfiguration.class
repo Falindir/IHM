@@ -1,3 +1,0 @@
-@Configuration
-@EnableAutoConfiguration
-class SimpleConfiguration {}
