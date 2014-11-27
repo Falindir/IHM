@@ -16,7 +16,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
 	<context:component-scan base-package="org.um2.taskboard.web.controllers" />
 	<mvc:annotation-driven/>
 </beans>

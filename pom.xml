@@ -4,10 +4,13 @@
 	<groupId>org.um2.taskboard</groupId>
 	<artifactId>um2-ihm-taskboard</artifactId>
 	<packaging>war</packaging>
+
 	<version>0.0.1-SNAPSHOT</version>
 	<name>um2-ihm-taskboard Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java-version>1.7</java-version>
 		<org.springframework-version>4.1.0.RELEASE</org.springframework-version>
 		<org.springframework.security-version>3.2.0.RELEASE</org.springframework.security-version>
@@ -224,6 +227,9 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
+				<configuration>
+					<port>20000</port>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
