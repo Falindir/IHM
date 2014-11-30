@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/data/jpa 
+	http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd ">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- CSRF protection. Here we only include the CsrfFilter instead of all 
+		of Spring Security. See http://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/#csrf 
+		for more information on Spring Security's CSRF protection -->
+	<bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
+		</constructor-arg>
+	</bean>
+	<!-- Provides automatic CSRF token inclusion when using Spring MVC Form 
+		tags or Thymeleaf. See http://localhost:8080/#forms and form.jsp for examples -->
+	<bean id="requestDataValueProcessor"
+		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
+	<jpa:repositories base-package="org.um2.taskboard.repository.springdatajpa" />
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="mainDataSource" />
+		<property name="packagesToScan" value="org.um2.taskboard.repository" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true" />
+				<property name="showSql" value="false" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+				<property name="database" value="MYSQL" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+		</property>
+	</bean>
+
+</beans>
