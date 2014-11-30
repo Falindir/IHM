@@ -1,10 +1,12 @@
 package org.um2.taskboard.repository;
 
+import org.springframework.stereotype.Repository;
 /**
  * Created by BEUGNON on 15/11/2014.
  */
 import org.um2.taskboard.model.User;
 
+@Repository
 public interface UserRepository extends BaseEntityRepository<User>
 {
     @Override

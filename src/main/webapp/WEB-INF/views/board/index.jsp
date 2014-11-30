@@ -1,14 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Thesaurus Creator</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="designTC.css" rel=stylesheet type="text/css">
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-</head>
+<jsp:include page="../fragments/headTag.jsp"/>
 <body>
 	<div class="wrap"> 
 		<header>	
@@ -209,10 +204,10 @@
 				</div>
 			</footer> 
 		</div>
-	</body>
-	</html>
-
-	<script type="text/javascript">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <c:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapJS"/>
+        <script type="text/javascript" src="${bootstrapJS}"></script>
+		<script type="text/javascript">
 	function submitform(name)
 	{
 		document.forms[name].submit();
@@ -224,3 +219,8 @@
 	}
 
 	</script>
+		
+	</body>
+	</html>
+
+	

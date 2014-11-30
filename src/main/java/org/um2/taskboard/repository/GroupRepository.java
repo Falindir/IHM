@@ -1,10 +1,12 @@
 package org.um2.taskboard.repository;
 
+import org.springframework.stereotype.Repository;
 import org.um2.taskboard.model.Group;
 
 /**
  * Created by BEUGNON on 15/11/2014.
  */
+@Repository
 public interface GroupRepository extends BaseEntityRepository<Group>
 {
     @Override

@@ -20,5 +20,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<context:component-scan base-package="org.um2.taskboard.web.controllers" />
+	
 	<mvc:annotation-driven/>
+
 </beans>

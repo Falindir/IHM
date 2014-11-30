@@ -1,5 +1,6 @@
 package org.um2.taskboard.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,8 +42,12 @@ public class Board extends BaseEntity {
     //@NotEmpty
 	private String description;
     
+    @ManyToOne(targetEntity=User.class)
+    private User creator;
+    
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
-    private Set<TaskList> taskLists;
+    private List<TaskList> taskLists;
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "board_users", joinColumns = @JoinColumn(name = "board_id"),
@@ -73,7 +79,7 @@ public class Board extends BaseEntity {
 	}
 	
 	//TODO faire les bonnes métodes pour la gestion des collections de tasklist
-	public Set<TaskList> getTaskLists() {
+	public List<TaskList> getTaskLists() {
 		return taskLists;
 	}
 
@@ -95,6 +101,21 @@ public class Board extends BaseEntity {
 
 	public void setParticipants(Set<User> participants) {
 		this.participants = participants;
+	}
+
+	public User getCreator()
+	{
+		return this.creator;
+	}
+	
+	public void setCreator(User user)
+	{
+		this.creator=user;
+	}
+
+	public void setTaskLists(List<TaskList> set)
+	{
+		this.taskLists=set;
 	}
 	
 	

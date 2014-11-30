@@ -121,4 +121,9 @@ public class User extends BaseEntity implements UserDetails {
 	public void setWorks(Set<WorkUser> works) {
 		this.works = works;
 	}
+
+	public void setUsername(String string)
+	{
+		this.name=string;
+	}
 }

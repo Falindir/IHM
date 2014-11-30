@@ -12,17 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController
 {
-    @RequestMapping(name="home", value="/home", method= RequestMethod.GET)
+    @RequestMapping(name="home", value="/", method= RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("welcome");
-
+        ModelAndView mav = new ModelAndView("index");
         return mav;
     }
-
-    @RequestMapping(name="home", value="/welcome")
-    public ModelAndView welcome() {
-        ModelAndView mav = new ModelAndView("welcome");
-        return mav;
-    }
+    
 
 }
