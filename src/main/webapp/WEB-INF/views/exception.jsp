@@ -8,7 +8,6 @@
 
 <body>
 <div class="container">
-    <jsp:include page="fragments/bodyHeader.jsp"/>
     <spring:url value="/resources/images/pets.png" var="petsImage"/>
     <img src="${petsImage}"/>
 
@@ -22,8 +21,6 @@
 			</c:forEach>
 	  	-->
 
-
-    <jsp:include page="fragments/footer.jsp"/>
 
 </div>
 </body>
