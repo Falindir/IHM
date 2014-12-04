@@ -17,8 +17,16 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public User findUserByName(String name) throws DataAccessException {
-        return userRepository.findOne(0000L);
+        return userRepository.findByName(name);
     }
+
+	@Override
+	@Transactional
+	public User findUserByMail(String mail) throws DataAccessException {
+		return userRepository.findByMail(mail);
+	}
+	
+	
 }

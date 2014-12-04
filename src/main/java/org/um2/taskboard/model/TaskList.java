@@ -1,6 +1,6 @@
 package org.um2.taskboard.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class TaskList extends BaseEntity
 	private Board board;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tasks")
-	private Set<Task> tasks;
+	private List<Task> tasks;
 	
 	public String getName()
 	{
@@ -60,7 +60,7 @@ public class TaskList extends BaseEntity
 		this.board = board;
 	}
 	
-	public Set<Task> getTasks()
+	public List<Task> getTasks()
 	{
 		return tasks;
 	}
@@ -77,7 +77,7 @@ public class TaskList extends BaseEntity
 			getTasks().remove(task);
 	}
 	
-	public void setTasks(Set<Task> tasks)
+	public void setTasks(List<Task> tasks)
 	{
 		this.tasks = tasks;
 	}

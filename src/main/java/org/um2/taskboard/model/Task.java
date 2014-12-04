@@ -43,7 +43,7 @@ public class Task extends BaseEntity
 	// TODO passer en enum et valeur par default
 	@Column(name = "state")
 	@NotEmpty
-	private String state;
+	private TaskState state;
 	
 	private Group group;
 	
@@ -87,12 +87,12 @@ public class Task extends BaseEntity
 		this.description = description;
 	}
 
-	public String getState()
+	public TaskState getState()
 	{
 		return state;
 	}
 
-	public void setState(String state)
+	public void setState(TaskState state)
 	{
 		this.state = state;
 	}
@@ -156,7 +156,5 @@ public class Task extends BaseEntity
 	{
 		this.dueDate = dueDate;
 	}
-	
-	
 	
 }

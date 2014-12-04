@@ -1,6 +1,7 @@
 package org.um2.taskboard.web.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.um2.taskboard.model.Board;
+import org.um2.taskboard.model.Task;
 import org.um2.taskboard.model.TaskList;
+import org.um2.taskboard.model.TaskState;
 import org.um2.taskboard.model.User;
 
 @Controller
@@ -20,7 +23,7 @@ import org.um2.taskboard.model.User;
 public class BoardController
 {
 	
-	// BoardService bs;
+	//BoardService bs;
 	
 	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request)
@@ -82,11 +85,53 @@ public class BoardController
 		mav = new ModelAndView("board/show");
 		TaskList tl = new TaskList();
 		tl.setBoard(b);
-		tl.setName("toto1");
+		tl.setName("scénario");
 		b.addTasklist(tl);
+		tl.setTasks(new ArrayList<Task>());
+		Task task = new Task();
+		
+		task.setName("Produire Scénario 1");
+		task.setCreator(u);
+		task.setCreationDate(new Date());
+		task.setDescription("Il faut réaliser un scénario pour le taskboard (voir le board)");
+		task.setState(TaskState.IN_PROGRESS);
+		//+3 jours
+		Date due = new Date(task.getCreationDate().getTime()+3600*24*3);
+		task.setDueDate(due);
+		task.setTasklist(tl);
+		tl.addTask(task);
+		task = new Task();
+		
+		task.setName("Produire Scénario 2");
+		task.setCreator(u);
+		task.setCreationDate(new Date());
+		task.setDescription("Il faut réaliser un scénario pour le taskboard (voir le bilan)");
+		task.setState(TaskState.IN_PROGRESS);
+		//+3 jours
+		due = new Date(task.getCreationDate().getTime()+3600*24*3);
+		task.setDueDate(due);
+		task.setTasklist(tl);
+		tl.addTask(task);
+		
+		
+		
 		tl = new TaskList();
 		tl.setBoard(b);
-		tl.setName("toto2");
+		tl.setName("Storyboard");
+
+		tl.setTasks(new ArrayList<Task>());
+		task.setName("Storyboard - Afficher le Bilan");
+		task.setCreator(u);
+		task.setCreationDate(new Date());
+		task.setDescription("Faire un storyboard pour afficher le bilan");
+		task.setState(TaskState.IN_PROGRESS);
+		//+3 jours
+		due = new Date(task.getCreationDate().getTime()+3600*24*3);
+		task.setDueDate(due);
+		task.setTasklist(tl);
+		tl.addTask(task);
+		
+		
 		b.addTasklist(tl);
 		mav.addObject("board", b);
 		mav.addObject("id", -1);

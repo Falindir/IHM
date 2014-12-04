@@ -1,7 +1,5 @@
 package org.um2.taskboard.repository.springdatajpa;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.um2.taskboard.model.User;
 import org.um2.taskboard.repository.UserRepository;
 
@@ -42,6 +40,8 @@ public interface SpringUserRepository extends UserRepository
 
     @Override
     void deleteAll();
+    
+    
 
 
 }

@@ -1,6 +1,9 @@
 package org.um2.taskboard.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
+import org.um2.taskboard.model.Group;
 /**
  * Created by BEUGNON on 15/11/2014.
  */
@@ -41,5 +44,12 @@ public interface UserRepository extends BaseEntityRepository<User>
 
     @Override
     void deleteAll();
+
+	User findByName(String name);
+
+	
+	User findByMail(String mail);
+	
+	List<User> findByGroup(Group group);
 
 }

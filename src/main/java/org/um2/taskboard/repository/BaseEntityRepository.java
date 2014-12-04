@@ -1,11 +1,12 @@
 package org.um2.taskboard.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.um2.taskboard.model.BaseEntity;
-import org.um2.taskboard.model.User;
 /**
  * Created by BEUGNON on 15/11/2014.
  */
+@NoRepositoryBean
 public interface BaseEntityRepository<T extends BaseEntity> extends CrudRepository<T,Long>
 {
     @Override
