@@ -1,5 +1,6 @@
 package org.um2.taskboard.repository.springdatajpa;
 
+import org.springframework.stereotype.Repository;
 import org.um2.taskboard.model.User;
 import org.um2.taskboard.repository.UserRepository;
 

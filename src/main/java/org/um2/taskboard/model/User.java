@@ -10,6 +10,7 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -42,7 +43,7 @@ public class User extends BaseEntity implements UserDetails {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
     private Set<Group> groups;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participants")
     private Set<Board> boards;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)

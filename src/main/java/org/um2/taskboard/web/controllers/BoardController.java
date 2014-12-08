@@ -6,9 +6,12 @@ import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.um2.taskboard.model.Board;
@@ -16,6 +19,7 @@ import org.um2.taskboard.model.Task;
 import org.um2.taskboard.model.TaskList;
 import org.um2.taskboard.model.TaskState;
 import org.um2.taskboard.model.User;
+import org.um2.taskboard.service.UserService;
 
 @Controller
 @SessionAttributes(value = "user", types = User.class)
@@ -23,7 +27,9 @@ import org.um2.taskboard.model.User;
 public class BoardController
 {
 	
-	//BoardService bs;
+	@Autowired
+	UserService us;
+
 	
 	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request)
@@ -33,6 +39,28 @@ public class BoardController
 		// List<Board> list = bs.findAllBoardWithAdministrator(u);
 		
 		// mav.addObject("adminBoards", list);
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/create",method=RequestMethod.POST)
+	public ModelAndView create(HttpServletRequest request,
+			@RequestParam(value="name",required=true) String name,
+			@RequestParam(value="description",required=true) String description,
+			@RequestParam(value="access",required=true) String access
+			)
+	{
+		Board board = new Board();
+		board.setAccess(access);
+		board.setCreator((User)request.getSession().getAttribute("user"));
+		board.setDescription(description);
+		board.setName(name);
+		
+	
+		//bs.addThisNewBoard(board);
+		
+		
+		ModelAndView mav = new ModelAndView("redirect:/board/show/"+board.getId());	
 		return mav;
 	}
 	
@@ -55,6 +83,9 @@ public class BoardController
 		b.setName("TEST");
 		User u = new User();
 		u.setUsername("Toto Toto");
+		
+		us.addUser(u);
+		
 		b.setCreator(u);
 		mav = new ModelAndView("board/show");
 		mav.addObject("board", b);

@@ -9,7 +9,7 @@ import org.um2.taskboard.model.Group;
  */
 import org.um2.taskboard.model.User;
 
-@Repository
+
 public interface UserRepository extends BaseEntityRepository<User>
 {
     @Override
@@ -21,6 +21,7 @@ public interface UserRepository extends BaseEntityRepository<User>
     @Override
     User findOne(Long aLong);
 
+    
     @Override
     boolean exists(Long aLong);
 
@@ -44,12 +45,5 @@ public interface UserRepository extends BaseEntityRepository<User>
 
     @Override
     void deleteAll();
-
-	User findByName(String name);
-
-	
-	User findByMail(String mail);
-	
-	List<User> findByGroup(Group group);
 
 }

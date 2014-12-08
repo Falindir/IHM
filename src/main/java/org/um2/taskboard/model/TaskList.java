@@ -37,7 +37,7 @@ public class TaskList extends BaseEntity
 	@NotEmpty
 	private Board board;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tasks")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tasklist")
 	private List<Task> tasks;
 	
 	public String getName()

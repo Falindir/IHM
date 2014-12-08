@@ -50,8 +50,11 @@ public class Board extends BaseEntity {
     private List<TaskList> taskLists;
     
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "board_users", joinColumns = @JoinColumn(name = "board_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "users", joinColumns = 
+    {@JoinColumn(name = "id")},
+    inverseJoinColumns = 
+    {@JoinColumn(name = "user_id")}
+    )
     private Set<User> participants;
 
 	public String getName() {

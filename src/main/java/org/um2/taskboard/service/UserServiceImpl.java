@@ -19,13 +19,19 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findUserByName(String name) throws DataAccessException {
-        return userRepository.findByName(name);
+       return null;
     }
 
 	@Override
 	@Transactional
 	public User findUserByMail(String mail) throws DataAccessException {
-		return userRepository.findByMail(mail);
+		return null;
+	}
+
+	@Override
+	public void addUser(User u)
+	{
+		userRepository.save(u);
 	}
 	
 	
