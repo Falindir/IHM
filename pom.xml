@@ -9,6 +9,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<version>0.0.1-SNAPSHOT</version>
 	<name>um2-ihm-taskboard Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
