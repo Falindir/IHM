@@ -298,7 +298,7 @@
       <mainClass>org.um2.taskboard.TaskboardSchemaGenerator</mainClass>
       <arguments>
         <argument>org.um2.taskboard.model</argument>
-        <argument>${project.basedir}/src/main/resources/db</argument>
+        <argument>${project.basedir}/src/main/resources/db/</argument>
       </arguments>
     </configuration>
   </plugin>
