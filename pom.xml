@@ -13,6 +13,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java-version>1.7</java-version>
+		<sql.generation.phase>process-classes</sql.generation.phase>
+    	<jdk.version>1.7</jdk.version>
 		<org.springframework-version>4.1.0.RELEASE</org.springframework-version>
 		<org.springframework.security-version>3.2.0.RELEASE</org.springframework.security-version>
 		<org.aspectj-version>1.8.1</org.aspectj-version>
@@ -24,7 +26,7 @@
 		<!-- Bean validation -->
 		<org.hibernate.version>4.1.7.Final</org.hibernate.version>
 		<hibernate.maven.plugin.version>3.6.10.Final</hibernate.maven.plugin.version>
-		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
+		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
 		<hibernate3.maven.plugin.version>3.0</hibernate3.maven.plugin.version>
 		<!-- Database access -->
 		<tomcat-jdbc.version>7.0.42</tomcat-jdbc.version>
@@ -246,6 +248,11 @@
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
+					<testSource>${jdk.version}</testSource>
+			       <testTarget>${jdk.version}</testTarget>
+			       <showDeprecation>true</showDeprecation>
+			       <showWarnings>true</showWarnings>
+			       <encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -259,6 +266,14 @@
 				</configuration>
 			</plugin>
 			<plugin>
+		       <groupId>org.apache.maven.plugins</groupId>
+		       <artifactId>maven-resources-plugin</artifactId>
+		       <version>2.6</version>
+		       <configuration>
+		       <encoding>${project.build.sourceEncoding}</encoding>
+		       </configuration>
+       		</plugin>
+			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
@@ -266,6 +281,27 @@
 					<port>20000</port>
 				</configuration>
 			</plugin>
+			<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.3.2</version>
+    <executions>
+      <execution>
+        <phase>${sql.generation.phase}</phase>
+        <!-- this is process-classes in our case <span class="hiddenSuggestion" pre="case ">currently</span> -->
+        <goals>
+          <goal>java</goal>
+        </goals>
+      </execution>
+    </executions>
+    <configuration>
+      <mainClass>org.um2.taskboard.TaskboardSchemaGenerator</mainClass>
+      <arguments>
+        <argument>org.um2.taskboard.model</argument>
+        <argument>${project.basedir}/src/main/resources/db</argument>
+      </arguments>
+    </configuration>
+  </plugin>
 		</plugins>
 
 
