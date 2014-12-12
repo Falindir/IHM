@@ -2,13 +2,7 @@ package org.um2.taskboard.model;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -33,9 +27,9 @@ public class Group extends BaseEntity
 	
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "admin")
+
 	@NotEmpty
+    @ManyToOne
 	private User admin;
 	
 	@Column(name = "access")

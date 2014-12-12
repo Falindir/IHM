@@ -44,7 +44,8 @@ public class Task extends BaseEntity
 	@Column(name = "state")
 	@NotEmpty
 	private TaskState state;
-	
+
+    @ManyToOne
 	private Group group;
 	
 	@ManyToOne

@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Entity
-@Table(name = "Users",uniqueConstraints={@UniqueConstraint(columnNames="mail"),
-        @UniqueConstraint(columnNames="name")})
+@Table(name = "Users",uniqueConstraints={ @UniqueConstraint(name="unque.mail", columnNames="mail"),
+        @UniqueConstraint(name="unique.name", columnNames="name")})
 public class User extends BaseEntity implements UserDetails {
 
     /**
