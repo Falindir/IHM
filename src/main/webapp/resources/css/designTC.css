@@ -101,3 +101,240 @@ textarea {
   text-align: left;
   color: #333;
 }
+
+#otherBoard, #myBoard {
+  color: #333;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#myBoardPanel, #otherBoardPanel {
+  width: 80%;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#searchOtherTheso {
+  color: #333;
+}
+
+.selectpicker {
+  color: #334;
+}
+
+
+/*/*******/
+
+
+
+
+.panel > .list-group .list-group-item:first-child {
+    /*border-top: 1px solid rgb(204, 204, 204);*/
+}
+.panel-heading.c-list {
+  text-align: left;
+}
+.list-group-item {
+    text-align: left;
+    color: #334;
+}
+
+#back-to-bootsnipp {
+    position: fixed;
+    top: 10px; right: 10px;
+}
+
+
+.c-search > .form-control {
+   border-radius: 0px;
+   border-width: 0px;
+   border-bottom-width: 1px;
+   font-size: 1.3em;
+   padding: 12px 12px;
+   height: 44px;
+   outline: none !important;
+}
+.c-search > .form-control:focus {
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none;
+}
+.c-search > .input-group-btn .btn {
+   border-radius: 0px;
+   border-width: 0px;
+   border-left-width: 1px;
+   border-bottom-width: 1px;
+   height: 44px;
+}
+
+
+.c-list {
+    padding: 0px;
+    min-height: 44px;
+}
+.title {
+    display: inline-block;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 5px 15px;
+    text-align: left;
+}
+ul.c-controls {
+    list-style: none;
+    margin: 0px;
+    min-height: 44px;
+}
+
+ul.c-controls li {
+    margin-top: 8px;
+    float: left;
+}
+
+ul.c-controls li a {
+    font-size: 1.7em;
+    padding: 11px 10px 6px;   
+}
+ul.c-controls li a i {
+    min-width: 24px;
+    text-align: center;
+}
+
+ul.c-controls li a:hover {
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+.c-toggle {
+    font-size: 1.7em;
+}
+
+.name {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.c-info {
+    padding: 5px 10px;
+    font-size: 1.25em;
+}
+
+.tilt {
+    transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -webkit-transform: rotate(3deg);
+  }
+ 
+  .tasklists {
+      width: 100%;
+      overflow: hidden;
+  }
+ 
+  .tasklist {
+    float: left;
+    margin-top: 20px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    padding-bottom: 20px;
+  }
+
+
+  .portlet {
+    margin: 0em 1em 1em 1em;
+    padding: 0.3em;
+    text-align: left;
+
+    
+  }
+  .portlet-header {
+    padding: 0.2em 0.3em;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  .portlet-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -8px;
+  }
+
+  .portlet-footer {
+    position: absolute;
+  }
+  .portlet-content {
+    padding: 0.4em;
+  }
+  .portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+  }
+
+  #tabStats{
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 2%;
+  }
+ 
+  .accordion, .tabStatsTR, .tabStatsTRhidden {
+      width: 100%;
+      float:left;
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
+  }
+ 
+ .tabStatsTH, .tabStatsColumn, .tabStatsTD {
+      width: 25%;
+      float:left;
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      color: #333;
+  }
+
+ .tabStatsColumn, .tabStatsTR {
+    background-color: white;
+    height: 30px;
+    margin-top: 2px;
+  }
+
+
+  .portlet.portlet-content1.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+    border:3px solid #009900;
+
+  }
+
+
+  .addNewTask {
+    margin-top: 10px;
+  }
+
+.underConstructionWebSite{
+  margin: 20px;
+  text-align: left;
+}
+
+
+.modalNewTask {
+  text-align: left;
+}
+
+.panel-group.contenerTask {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  text-align: left;
+}
+
+.canvasBilan {
+      margin-top : 5%;
+      margin:left : 2.5%;
+      margin-right: 2.5%;
+      margin-bottom: 5%;
+      display: inline-block;
+      position: relative;
+  }
+
+

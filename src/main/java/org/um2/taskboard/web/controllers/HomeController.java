@@ -35,6 +35,18 @@ public class HomeController
     	ModelAndView mav = new ModelAndView("index");
         return mav;
     }
+
+    @RequestMapping(name="connection", value="/connection", method= RequestMethod.POST)
+    public String connection() {
+        ModelAndView mav = new ModelAndView("board");
+        return "redirect:/board/";
+    }
+    
+    @RequestMapping(name="connection", value="/inscription", method= RequestMethod.POST)
+    public String inscription() {
+        ModelAndView mav = new ModelAndView("board");
+        return "redirect:/board/";
+    }
     
 
 }

@@ -116,7 +116,7 @@ public class BoardController
 		mav = new ModelAndView("board/show");
 		TaskList tl = new TaskList();
 		tl.setBoard(b);
-		tl.setName("scénario");
+		tl.setName("Scénario");
 		b.addTasklist(tl);
 		tl.setTasks(new ArrayList<Task>());
 		Task task = new Task();
@@ -151,6 +151,7 @@ public class BoardController
 		tl.setName("Storyboard");
 
 		tl.setTasks(new ArrayList<Task>());
+		task = new Task();
 		task.setName("Storyboard - Afficher le Bilan");
 		task.setCreator(u);
 		task.setCreationDate(new Date());
@@ -162,8 +163,29 @@ public class BoardController
 		task.setTasklist(tl);
 		tl.addTask(task);
 		
-		
 		b.addTasklist(tl);
+
+		tl = new TaskList();
+		tl.setBoard(b);
+		tl.setName("Maquette");
+		b.addTasklist(tl);
+
+		b.addTasklist(tl);
+
+		tl = new TaskList();
+		tl.setBoard(b);
+		tl.setName("Evaluation");
+		b.addTasklist(tl);
+
+		b.addTasklist(tl);
+
+		tl = new TaskList();
+		tl.setBoard(b);
+		tl.setName("Présentation");
+		b.addTasklist(tl);
+
+		b.addTasklist(tl);
+
 		mav.addObject("board", b);
 		mav.addObject("id", -1);
 		return mav;
@@ -187,4 +209,13 @@ public class BoardController
 	 * 
 	 * }
 	 */
+
+	    @RequestMapping("/bilan")
+        public ModelAndView bilan(HttpServletRequest request) {
+ 
+            ModelAndView mav = new ModelAndView("profil/bilan");
+
+            return mav;
+        }
+
 }
