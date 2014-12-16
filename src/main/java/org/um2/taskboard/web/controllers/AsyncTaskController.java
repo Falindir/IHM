@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.um2.taskboard.model.Task;
+import org.um2.taskboard.model.Board;
 import org.um2.taskboard.model.TaskState;
 import org.um2.taskboard.model.User;
 
@@ -57,4 +58,9 @@ public class AsyncTaskController
 		return new Task();
 	}
 	
+	@RequestMapping(value="/boards/test")
+	public Board test2()
+	{
+		return new Board();
+	}
 }

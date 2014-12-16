@@ -1,40 +1,85 @@
 package org.um2.taskboard.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.um2.taskboard.model.Board;
+import org.um2.taskboard.model.Task;
 import org.um2.taskboard.model.User;
+import org.um2.taskboard.repository.BoardRepository;
+import org.um2.taskboard.repository.TaskRepository;
 
 @Service
 public class TaskboardServiceImpl implements TaskboardService
 {
 	
+	@Autowired
+	BoardRepository bs;
+	
+	@Autowired
+	TaskRepository tr;
+	
 	@Override
-	public List<Board> findAllBoardWithAdministrator(User administrator)
+	public List<Board> findAllBoardsWithAdministrator(User administrator)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Board> bl = new ArrayList<>();
+		for(Board b : bs.findAll())
+		{
+			if(b.getCreator().getId().equals(administrator.getId()))
+				bl.add(b);
+		}
+		return bl;
 	}
 	
 	@Override
-	public List<Board> findAllBoardWithMember(User user)
+	public List<Board> findAllBoardsWithMember(User user)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Board> bl = new ArrayList<>();
+		for(Board b : bs.findAll())
+		{
+			if(b.getParticipants().contains(user))
+				bl.add(b);
+		}
+		return bl;
 	}
 	
 	@Override
 	public Board findOneBoardById(long id)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return bs.findOne(id);
 	}
 	
+
 	@Override
-	public void addThisNewBoard(Board board) throws DataAccessException
+	public void createNewBoard(Board board)
 	{
+		bs.save(board);
+	}
+
+	@Override
+	public void saveTask(Task task)
+	{
+		tr.save(task);
+	}
+
+	@Override
+	public List<Board> findAllPublicBoards(User user)
+	{
+		List<Board> bl = new ArrayList<>();
+		for(Board b : bs.findAll())
+		{
+			if(b.getAccess().equals("public"))
+				bl.add(b);
+		}
+		return bl;
+	}
+
+	@Override
+	public void testBoard()
+	{
+		// TODO Auto-generated method stub
 		
 	}
 	

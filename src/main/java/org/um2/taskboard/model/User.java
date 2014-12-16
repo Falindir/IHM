@@ -1,16 +1,22 @@
 package org.um2.taskboard.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -19,8 +25,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Entity
-@Table(name = "Users",uniqueConstraints={ @UniqueConstraint(name="unque.mail", columnNames="mail"),
-        @UniqueConstraint(name="unique.name", columnNames="name")})
+@Table(name = "Users",uniqueConstraints={ @UniqueConstraint(name="unique.mail", columnNames="mail")}
+        )
 public class User extends BaseEntity implements UserDetails {
 
     /**
@@ -28,13 +34,39 @@ public class User extends BaseEntity implements UserDetails {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "name")
+	@Column(name = "lastName")
     @NotEmpty
-	private String name;
+	private String lastname;
+	
+	@Column(name = "firstName")
+	@NotEmpty
+	private String firstname;
+
     
-    @Column(name = "mail")
+    public String getLastName()
+	{
+		return lastname;
+	}
+
+	public void setLastName(String name)
+	{
+		this.lastname = name;
+	}
+
+	public String getFirstname()
+	{
+		return firstname;
+	}
+
+	public void setFirstname(String firstname)
+	{
+		this.firstname = firstname;
+	}
+
+	@Column(name = "mail")
     @NotEmpty
 	private String mail;
+	
     
     @Column(name = "password")
     @NotEmpty
@@ -72,7 +104,7 @@ public class User extends BaseEntity implements UserDetails {
 
 
     public String getUsername() {
-        return this.name;
+        return this.mail;
     }
 
     
@@ -125,6 +157,8 @@ public class User extends BaseEntity implements UserDetails {
 
 	public void setUsername(String string)
 	{
-		this.name=string;
+		this.mail=string;
 	}
+	
+	
 }

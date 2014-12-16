@@ -45,5 +45,7 @@ public interface UserRepository extends BaseEntityRepository<User>
 
     @Override
     void deleteAll();
+    
+	User findByMail(String mail);
 
 }

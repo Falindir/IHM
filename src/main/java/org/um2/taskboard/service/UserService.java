@@ -10,13 +10,11 @@ import org.um2.taskboard.model.User;
  */
 
 public interface UserService {
-	@Transactional
-    User findUserByName(String name) throws DataAccessException;
 	
 	
 	@Transactional
     User findUserByMail(String name) throws DataAccessException;
 
-
-	void addUser(User u);
+	@Transactional
+	void saveUser(User u);
 }

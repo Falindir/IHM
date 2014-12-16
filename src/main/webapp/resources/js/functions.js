@@ -2,6 +2,7 @@
 
     $(document).ready(function () {
 
+        checkState();
         $(".tasklist").sortable({
             connectWith: ".tasklist",
             handle: ".portlet-header",
@@ -58,5 +59,60 @@
         $('taskLength').remove();
        
         $( ".accordion" ).accordion({collapsible : true, active : 'none'});
+   
+        $('.addNewTask').on('click', function() {
+            $('input#titleTaskList').attr('placeholder', $(this).find('a').attr('name'));
+        })
+
+        function checkState() {
+            $('.taskStateHidden').each(function(){
+            if($(this).attr('name') == "IN_PROGRESS")
+                $(this).parent('div').css('border-color','#00008B');
+            if($(this).attr('name') == "CANCELLED")
+                $(this).parent('div').css('border-color','#FF8C00');
+            if($(this).attr('name') == "DONE")
+                $(this).parent('div').css('border-color','#006400');
+            if($(this).attr('name') == "LATE")
+                $(this).parent('div').css('border-color','#8B0000');
+
+        });
+        }
+
+        $('a.cancel').on('click', function() {
+            annulerTask($(this).parent('div.modal').attr('id'));
+            checkState();
+        });
+
+        $('a.terminate').on('click', function() {
+            terminateTask($(this).parent('div.modal').attr('id'));
+            checkState();
+        })
+
+        
+
+        $('.cbTaskState').on('click', function() {
+            var tabEnumTemp = hideShow();
+            $('.taskStateHidden').each(function() {
+                for (i = 0; i < tabEnumTemp.length; i++) { 
+                    if($(this).attr('name') == tabEnumTemp[i]) {
+                        $(this).hide();
+                    }
+                }
+            })
+        })
+
+        function hideShow() {
+            var tabEnum = new Array();
+            $('.cbTaskState').each(function() {
+                if($(this).is(':checked')) {
+                    // do nothing
+                } else {
+                    console.log($(this).attr('name').val());
+                    tabEnum.push($(this).attr('name'));
+                }
+            });
+            return tabEnum;
+        }
+
     });
 

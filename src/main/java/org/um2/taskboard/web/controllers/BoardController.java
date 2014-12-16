@@ -19,6 +19,7 @@ import org.um2.taskboard.model.Task;
 import org.um2.taskboard.model.TaskList;
 import org.um2.taskboard.model.TaskState;
 import org.um2.taskboard.model.User;
+import org.um2.taskboard.service.TaskboardService;
 import org.um2.taskboard.service.UserService;
 
 @Controller
@@ -29,16 +30,27 @@ public class BoardController
 	
 	@Autowired
 	UserService us;
+	
+	@Autowired
+	TaskboardService bs;
 
 	
 	@RequestMapping("/")
 	public ModelAndView index(HttpServletRequest request)
 	{
-		// User u = (User) request.getSession().getAttribute("user");
 		ModelAndView mav = new ModelAndView("board/index");
-		// List<Board> list = bs.findAllBoardWithAdministrator(u);
-		
-		// mav.addObject("adminBoards", list);
+		if(request.getSession().getAttribute("user")==null)
+		{
+			mav.setViewName("redirect:/");
+			mav.addObject("alert", "Not connected !");
+			return mav;
+		}
+		User u = (User) request.getSession().getAttribute("user");
+		us.saveUser(u);
+			
+			
+		mav.addObject("adminBoards", bs.findAllBoardsWithAdministrator(u));
+		mav.addObject("boards", bs.findAllBoardsWithMember(u));
 		return mav;
 	}
 	
@@ -50,17 +62,25 @@ public class BoardController
 			@RequestParam(value="access",required=true) String access
 			)
 	{
+		ModelAndView mav = new ModelAndView();
+		if(request.getSession().getAttribute("user")==null)
+		{
+			mav.setViewName("redirect:/");
+			mav.addObject("alert", "Not connected !");
+			return mav;
+		}
+		User u = (User)request.getSession().getAttribute("user");
 		Board board = new Board();
-		board.setAccess(access);
-		board.setCreator((User)request.getSession().getAttribute("user"));
+		board.setAccess("public");
+		board.setCreator(u);
 		board.setDescription(description);
 		board.setName(name);
-		
 	
-		//bs.addThisNewBoard(board);
+	
+		bs.createNewBoard(board);
 		
 		
-		ModelAndView mav = new ModelAndView("redirect:/board/show/"+board.getId());	
+		mav = new ModelAndView("redirect:/board/show/"+board.getId());	
 		return mav;
 	}
 	
@@ -69,27 +89,52 @@ public class BoardController
 	public ModelAndView showBoard(@PathVariable(value = "id") String idString,
 			HttpServletRequest request)
 	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/");
+		if(request.getSession().getAttribute("user")==null)
+			return mav;
+		
+		User u  = (User) request.getSession().getAttribute("user");
+		
+		
+		
+		mav.setViewName("redirect:/board/");
+		long id=0;
+		if(idString!=null)
+		{
 		try
 		{
-			long id = Long.parseLong(idString);
+			 id = Long.parseLong(idString);
+			 Board b = bs.findOneBoardById(id);
+			 if(b!=null)
+			 {
+				
+				if(b.getAccess().equals("public")
+						||b.getCreator().equals(u) || b.getParticipants().contains(u))
+				{
+					 mav = new ModelAndView("board/show");
+					 mav.addObject("board", b);
+					mav.addObject("id", idString);
+				}
+				else
+				{
+					mav.addObject("alert","Not the right to go on this board");
+				}
+				
+				
+				
+			 }
+			 else
+			 {
+				mav.addObject("alert", "Board doesn't exist !");
+			 }
 		} catch (NumberFormatException e)
 		{
-			//TODO ERREUR 
+			mav.addObject("alert", "Board doesn't exist !");
+
 		}
-		ModelAndView mav;
-		Board b = new Board();
-		b.setAccess("PUBLIC");
-		b.setDescription("toto");
-		b.setName("TEST");
-		User u = new User();
-		u.setUsername("Toto Toto");
-		
-		us.addUser(u);
-		
-		b.setCreator(u);
-		mav = new ModelAndView("board/show");
-		mav.addObject("board", b);
-		mav.addObject("id", idString);
+		}
+
 		return mav;
 	}
 	
@@ -103,8 +148,10 @@ public class BoardController
 	public ModelAndView test(HttpServletRequest request)
 	{
 		ModelAndView mav;
+		mav = new ModelAndView("board/show");
+
 		Board b = new Board();
-		b.setAccess("PUBLIC");
+		b.setAccess("public");
 		b.setDescription("toto");
 		b.setName("TEST");
 		User u = new User();
@@ -113,19 +160,20 @@ public class BoardController
 		b.setCreator(u);
 		b.setParticipants(new HashSet<User>());
 		b.setTaskLists(new ArrayList<TaskList>());
-		mav = new ModelAndView("board/show");
+		
+
 		TaskList tl = new TaskList();
 		tl.setBoard(b);
-		tl.setName("Scénario");
-		b.addTasklist(tl);
+		tl.setName("Scénario2");
 		tl.setTasks(new ArrayList<Task>());
+
 		Task task = new Task();
 		
-		task.setName("Produire Scénario 1");
+		task.setName("Produire Scénario 101");
 		task.setCreator(u);
 		task.setCreationDate(new Date());
 		task.setDescription("Il faut réaliser un scénario pour le taskboard (voir le board)");
-		task.setState(TaskState.IN_PROGRESS);
+		task.setState(TaskState.LATE);
 		//+3 jours
 		Date due = new Date(task.getCreationDate().getTime()+3600*24*3);
 		task.setDueDate(due);
@@ -137,14 +185,14 @@ public class BoardController
 		task.setCreator(u);
 		task.setCreationDate(new Date());
 		task.setDescription("Il faut réaliser un scénario pour le taskboard (voir le bilan)");
-		task.setState(TaskState.IN_PROGRESS);
+		task.setState(TaskState.DONE);
 		//+3 jours
 		due = new Date(task.getCreationDate().getTime()+3600*24*3);
 		task.setDueDate(due);
 		task.setTasklist(tl);
 		tl.addTask(task);
 		
-		
+		b.addTasklist(tl);
 		
 		tl = new TaskList();
 		tl.setBoard(b);
@@ -156,7 +204,7 @@ public class BoardController
 		task.setCreator(u);
 		task.setCreationDate(new Date());
 		task.setDescription("Faire un storyboard pour afficher le bilan");
-		task.setState(TaskState.IN_PROGRESS);
+		task.setState(TaskState.DONE);
 		//+3 jours
 		due = new Date(task.getCreationDate().getTime()+3600*24*3);
 		task.setDueDate(due);
@@ -168,21 +216,19 @@ public class BoardController
 		tl = new TaskList();
 		tl.setBoard(b);
 		tl.setName("Maquette");
-		b.addTasklist(tl);
 
 		b.addTasklist(tl);
 
 		tl = new TaskList();
 		tl.setBoard(b);
 		tl.setName("Evaluation");
-		b.addTasklist(tl);
+
 
 		b.addTasklist(tl);
 
 		tl = new TaskList();
 		tl.setBoard(b);
 		tl.setName("Présentation");
-		b.addTasklist(tl);
 
 		b.addTasklist(tl);
 
@@ -191,24 +237,6 @@ public class BoardController
 		return mav;
 	}
 	
-	/*
-	 * @RequestMapping("/show/{id}") public ModelAndView
-	 * showBoard2(@RequestParam long id,HttpServletRequest request) {
-	 * ModelAndView mav; User u = (User)
-	 * request.getSession().getAttribute("user"); Board b =
-	 * bs.findOneBoardById(id); if(b!=null) { if(b.getCreator().equals(u) ||
-	 * b.getParticipants().contains(u) || b.getAccess().equals("PUBLIC")) {
-	 * mav=new ModelAndView("board/show"); mav.addObject("board", b); } else {
-	 * mav= new ModelAndView("redirect:/board/"); mav.addObject("message", new
-	 * String("You don't have acces to this board.")); } } else { mav = new
-	 * ModelAndView("redirect:/board/"); mav.addObject("message", new
-	 * String("This board doesn't exist !")); }
-	 * 
-	 * 
-	 * return mav;
-	 * 
-	 * }
-	 */
 
 	    @RequestMapping("/bilan")
         public ModelAndView bilan(HttpServletRequest request) {

@@ -10,7 +10,7 @@
 
 			<section>
 				<div class="container-fluid">
-					<h1>Board</h1>
+					<h1>Boards</h1>
 				</div>
 			</section>
 
@@ -18,15 +18,20 @@
 			<div class="container-fluid">
 				<div id = "myBoardPanel" class="panel panel-primary">
 					<div class="panel-heading">
-						<h3> My Board :</h3>
+						<h3> My Boards :</h3>
 					</div>
 					<div class="panel-body"> 
 						<div class="panel-group" id="myBoard" role="tablist" aria-multiselectable="true">
+						<c:if test="${adminBoards.size() == 0}">
+							<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newBoardModal" onclick="resetform('formBoard')"> Create new board </button>
+						</c:if>
+						<c:if test="${adminBoards.size() > 0}">
+						<c:forEach items="${adminBoards} " var ="ab" > 
 							<div class="panel panel-primary">
 								<div class="panel-heading" role="tab" id="myThesoOne">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#myBoard" aria-expanded="true" href="#collapseMyThesoOne" aria-controls="collapseMyThesoOne">
-											Board : IHM <span class="glyphicon glyphicon-chevron-down"></span>
+											Board :  <span class="glyphicon glyphicon-chevron-down"></span>
 										</a>
 
 									</h4>
@@ -38,21 +43,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-primary">
-								<div class="panel-heading" role="tab" id="myThesoTwo">
-									<h4 class="panel-title">
-										<a class="collapsed" data-toggle="collapse" data-parent="#myBoard" aria-expanded="false" href="#collapseMyThesoTwo" aria-controls="collapseMyThesoTwo">
-											Board : Animaux <span class="glyphicon glyphicon-chevron-down"></span>
-										</a>
-									</h4>
-								</div>
-								<div id="collapseMyThesoTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="myThesoTwo">
-									<div class="panel-body">
-										<p> Description : not documented </p>
-										<a href="#" class="btn btn-sm btn-success">Show Board</a>
-									</div>
-								</div>
-							</div>
+
+							</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -117,17 +110,18 @@
 									<h4 class="modal-title" id="myModalLabel">Creation of a new board</h4>
 								</div> <!-- /.modal-header -->
 								<div class="modal-body">
-									<form id="formBoard" class="form-horizontal" method="POST" action="boardTC.html">
+								<c:url var="form_create_url" value="/board/create"></c:url>
+									<form id="formBoard" class="form-horizontal" method="POST" action="${form_create_url}">
 										<div class="form-group">
 											<label for="titleUser" class="col-sm-4 control-label">Title :</label> 
 											<div id="contenerInputTitleUser" class = "col-sm-8">
-												<input class="form-control" id="titleUser" type="text" name="titleBoard" required>
+												<input class="form-control" id="titleUser" type="text" name="name" required>
 											</div>
 										</div>  
 										<div class="form-group">
 											<label for="accessUser" class="col-sm-4 control-label">Access :</label> 
 											<div id="contenerSelectAccessUser" class = "col-sm-8">
-												<select class="form-control" id="accessUser" type="text" name="titleBoard" required>
+												<select class="form-control" id="accessUser" type="text" name="access" required>
 													<option value="public" selected>Public</option>
 													<option value="private" >Private</option>
 												</select>
@@ -136,7 +130,7 @@
 										<div class="form-group">
 											<label for="descriptifBoardUser" class="col-sm-4 control-label">Description (optional)</label>
 											<div id="contenerInputdescriptifBoardUser" class = "col-sm-8">
-												<textarea class="form-control" rows="3"></textarea>
+												<textarea class="form-control" rows="3" name="description"></textarea>
 											</div>
 										</div>
 									</form>

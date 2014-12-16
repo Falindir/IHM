@@ -46,10 +46,10 @@ public class Board extends BaseEntity {
     private User creator;
     
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "board")
     private List<TaskList> taskLists;
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "board_users", joinColumns =
     {@JoinColumn(name = "id")},
     inverseJoinColumns = 
@@ -88,13 +88,11 @@ public class Board extends BaseEntity {
 
 	public void addTasklist(TaskList ts)
 	{
-		if( !this.getTaskLists().contains(ts) )
 			this.getTaskLists().add(ts);
 	}
 	
 	public void removeTasklist(TaskList ts)
 	{
-		if( this.getTaskLists().contains(ts) )
 			this.getTaskLists().remove(ts);
 	}
 

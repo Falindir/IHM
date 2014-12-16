@@ -1,6 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.um2.taskboard.model.User" %>
+
 
 <header>	
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -39,7 +41,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-user"></span> 
-							<strong>Lopez Jimmy</strong>
+							<strong>${user.firstname} ${user.getLastName()}.</strong>
 							<span class="glyphicon glyphicon-chevron-down"></span>
 						</a>
 						<ul class="dropdown-menu">
@@ -60,8 +62,6 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
-												<a href="groups" class="btn btn-success btn-block">My groups</a>
-												<a href="contacts" class="btn btn-success btn-block">My contacts</a>
 												<a href="bilan" class="btn btn-success btn-block">Get bilan</a>
 											</p>
 										</div>
@@ -73,7 +73,8 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<p>
-													<a href="#" class="btn btn-danger btn-block">Log out</a>
+												<c:url value="/logout" var="logout"/>
+													<a href="${logout}" class="btn btn-danger btn-block">Log out</a>
 												</p>
 											</div>
 										</div>

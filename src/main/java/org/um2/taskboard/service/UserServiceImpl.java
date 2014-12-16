@@ -16,23 +16,22 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Override
-    @Transactional
-    public User findUserByName(String name) throws DataAccessException {
-       return null;
-    }
+
 
 	@Override
 	@Transactional
 	public User findUserByMail(String mail) throws DataAccessException {
-		return null;
+		
+		return userRepository.findByMail(mail);
 	}
 
 	@Override
-	public void addUser(User u)
+	public void saveUser(User u)
 	{
 		userRepository.save(u);
 	}
+
+
 	
 	
 }

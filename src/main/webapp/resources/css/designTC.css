@@ -301,8 +301,8 @@ ul.c-controls li a:hover {
   }
 
 
-  .portlet.portlet-content1.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
-    border:3px solid #009900;
+  div.portlet {
+    border:3px solid #000;
 
   }
 
@@ -338,3 +338,31 @@ ul.c-controls li a:hover {
   }
 
 
+#filters {
+width: 100%;
+
+}
+
+.filterTR {
+width: 100%;
+}
+
+.filterTH, .filterTD {
+width: 33%;
+display: inline-block;
+border-width: 5px;
+border-color: #000;
+text-align: left;
+}
+
+.filterTH {
+text-align: center;
+}
+
+.filterTD {
+  float: left;
+}
+
+input[type="date"] {
+margin-left: 10px;
+}
